@@ -1,59 +1,35 @@
-# RedOpita
+# RedOpita  - Conectando Voluntades
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.0.
+**RedOpita** es una plataforma digital diseñada para fortalecer el tejido social en Neiva, Huila. Nuestra misión es conectar a ciudadanos comprometidos con organizaciones sociales y fundaciones locales, facilitando la logística de voluntariado y la distribución de ayudas en sectores vulnerables.
 
-## Development server
+## 🚀 Características Principales
 
-To start a local development server, run:
+- **Landing Page Informativa:** Secciones de Misión, Visión y "¿Quiénes Somos?" para generar confianza y transparencia.
+- **Sistema de Autenticación Dinámico:** Login y Registro integrados mediante modales de Bootstrap para una experiencia de usuario fluida.
+- **Gestión de Comunidades:** Foros de discusión en tiempo real para coordinar la logística de iniciativas como "Huertas Urbanas" y "Logística de Comedores".
+- **Postulación Directa:** Interfaz intuitiva para que los voluntarios se unan a causas específicas con un solo clic.
 
-```bash
-ng serve
-```
+## 🛠️ Tecnologías Utilizadas
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+El proyecto fue construido utilizando un stack moderno para garantizar escalabilidad y rendimiento:
 
-## Code scaffolding
+* **Frontend:** [Angular](https://angular.io/) (Arquitectura de Standalone Components).
+* **Estilos:** [Bootstrap 5](https://getbootstrap.com/) (Diseño responsivo y componentes dinámicos).
+* **Iconografía:** [Bootstrap Icons](https://icons.getbootstrap.com/).
+* **Herramientas de Desarrollo:** Angular CLI, TypeScript, HTML5 y CSS3.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
-```bash
-ng generate component component-name
-```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 📂 Estructura del Proyecto
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```text
+src/
+├── app/
+│   ├── features/
+│   │   └── auth/           # Lógica de Login y Registro (Modales)
+│   ├── shared/
+│   │   └── footer/         # Componentes reutilizables
+│   ├── inicio/             # Página principal y secciones de impacto
+│   ├── comunidades/        # Foros y grupos de discusión
+│   └── app.routes.ts       # Configuración de navegación
+└── assets/                 # Imágenes y recursos estáticos
