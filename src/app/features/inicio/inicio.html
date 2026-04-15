@@ -102,10 +102,18 @@
     </div>
   </div>
 
-  <div *ngIf="showLoginModal" class="modal fade show" style="display: block;" tabindex="-1" aria-labelledby="loginModalLabel" aria-modal="true" role="dialog">
-    <div class="modal-backdrop fade show"></div>
+  <div *ngIf="showLoginModal"
+       class="modal fade show"
+       id="loginModal"
+       tabindex="-1"
+       data-bs-backdrop="false"
+       aria-hidden="true"
+       aria-modal="true"
+       role="dialog"
+       style="display: block; background: transparent;"
+       (click)="closeLoginModal()">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content" style="border-radius: 20px; border: none;">
+      <div class="modal-content" style="border-radius: 20px; border: none;" (click)="$event.stopPropagation()">
         <div class="modal-body p-0">
           <div class="card p-4 shadow-lg border-0">
             <div class="text-end">

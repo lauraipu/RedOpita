@@ -30,7 +30,7 @@
             <button type="button"
                     class="btn flex-grow-1 rounded-pill btn-sm"
                     [ngClass]="community.accent === 'success' ? 'btn-outline-success' : 'btn-outline-warning'"
-                    (click)="joinCommunity(community)">
+                    (click)="openLoginModal(community)">
               {{ isJoined(community) ? 'Entrar al grupo' : 'Unirme al grupo' }}
             </button>
           </div>
@@ -58,7 +58,7 @@
               class="btn btn-orange rounded-pill px-4 py-2 fw-bold text-white"
               style="background-color: #f28131;"
               [disabled]="isJoined(selectedCommunity!)"
-              (click)="joinCommunity(selectedCommunity!)"
+              (click)="openLoginModal(selectedCommunity!)"
             >
               {{ isJoined(selectedCommunity!) ? 'Ya eres miembro' : 'Unirte al grupo' }}
             </button>
@@ -83,20 +83,39 @@
         <div class="mt-4">
           <div *ngIf="activeTab === 'hilos'">
             <div class="list-group">
-              <a href="#" class="list-group-item list-group-item-action">
+              <button type="button"
+                      class="list-group-item list-group-item-action text-start"
+                      *ngFor="let event of communityEvents[selectedCommunity?.id || '']"
+                      (click)="openEventDetail(event)">
                 <div class="d-flex w-100 justify-content-between">
-                  <h6 class="mb-1 fw-bold">Coordinación de siembra comunitaria</h6>
-                  <small class="text-muted">2h</small>
+                  <h6 class="mb-1 fw-bold">{{ event.title }}</h6>
+                  <small class="text-muted">{{ event.time }}</small>
                 </div>
-                <p class="mb-1 text-muted">Organizamos la próxima jornada de siembra para el sábado en la comuna 6.</p>
-              </a>
-              <a href="#" class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-between">
-                  <h6 class="mb-1 fw-bold">Recolección de donaciones de abono</h6>
-                  <small class="text-muted">5h</small>
+                <p class="mb-1 text-muted">{{ event.description }}</p>
+              </button>
+            </div>
+
+            <div class="mt-4">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="fw-bold mb-0">Chat de la comunidad</h5>
+                <small class="text-muted">Conversación reciente</small>
+              </div>
+              <div *ngIf="communityChats[selectedCommunity?.id || '']?.length; else noChat" class="list-group">
+                <div *ngFor="let chat of communityChats[selectedCommunity?.id || '']" class="list-group-item rounded-4 mb-2 border-0 shadow-sm">
+                  <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                      <strong>{{ chat.author }}</strong>
+                      <p class="mb-1 text-muted small">{{ chat.message }}</p>
+                    </div>
+                    <small class="text-muted">{{ chat.time }}</small>
+                  </div>
                 </div>
-                <p class="mb-1 text-muted">Buscamos voluntarios para recoger insumos donados por el vivero local.</p>
-              </a>
+              </div>
+              <ng-template #noChat>
+                <div class="alert alert-secondary rounded-4 mb-0" role="alert">
+                  Aún no hay mensajes en el chat de esta comunidad.
+                </div>
+              </ng-template>
             </div>
           </div>
 
@@ -111,7 +130,57 @@
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </ng-template>
+
+  <div *ngIf="selectedEvent" class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" style="background: rgba(0,0,0,0.12); z-index: 1050;" (click)="closeEventDetail()">
+    <div class="card shadow-lg rounded-4 p-4" style="max-width: 540px; width: 100%;" (click)="$event.stopPropagation()">
+      <div class="d-flex justify-content-between align-items-start mb-3">
+        <div>
+          <h4 class="fw-bold mb-1">{{ selectedEvent.title }}</h4>
+          <small class="text-muted">{{ selectedEvent.time }}</small>
+        </div>
+        <button type="button" class="btn-close" aria-label="Cerrar" (click)="closeEventDetail()"></button>
+      </div>
+      <p class="text-muted mb-3">{{ selectedEvent.description }}</p>
+      <div class="bg-light rounded-4 p-3">
+        <h6 class="fw-bold mb-2">Detalles del evento</h6>
+        <p class="mb-0">{{ selectedEvent.details }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showLoginModal"
+       class="modal fade show"
+       id="loginModal"
+       tabindex="-1"
+       data-bs-backdrop="false"
+       aria-hidden="true"
+       style="display: block; background: transparent;"
+       (click)="closeLoginModal()">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content shadow-lg border-0" style="background-color: white !important;" (click)="$event.stopPropagation()">
+        <div class="modal-header border-0">
+          <h5 class="modal-title">Regístrate o ingresa</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="closeLoginModal()"></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-muted">Para unirte a {{ modalCommunity?.title || 'este grupo' }}, crea una cuenta o ingresa.</p>
+          <form>
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" placeholder="tucorreo@ejemplo.com">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Contraseña</label>
+              <input type="password" class="form-control" placeholder="••••••••">
+            </div>
+            <button type="button" class="btn btn-primary w-100">Continuar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
