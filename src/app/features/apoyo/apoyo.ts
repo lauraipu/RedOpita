@@ -9,5 +9,13 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './apoyo.html'
 })
 export class ApoyoComponent {
-  // Aquí podrías agregar lógica para enviar el formulario más adelante
+  nombre = '';
+  email = '';
+
+  redirectToWhatsApp(event: Event) {
+    event.preventDefault();
+    const phone = '573001234567';
+    const text = encodeURIComponent(`Hola, soy ${this.nombre || 'un interesado'}. Mi correo es ${this.email || 'no proporcionado'}. Quiero donar excedentes de alimentos.`);
+    window.location.href = `https://wa.me/${phone}?text=${text}`;
+  }
 }
