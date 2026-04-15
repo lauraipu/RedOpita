@@ -9,43 +9,109 @@
     </div>
   </div>
 
-  <div class="row g-4">
-    <div class="col-md-6">
-      <div class="card border-0 shadow-sm p-4 rounded-4 bg-white border-start border-4 border-success">
-        <div class="d-flex justify-content-between align-items-start mb-3">
-          <div class="d-flex align-items-center">
-            <div class="bg-success text-white p-3 rounded-circle me-3">🤝</div>
-            <div>
-              <h5 class="mb-0 fw-bold">Huertas Urbanas Neiva</h5>
-              <span class="small text-muted">86 miembros • Activo hoy</span>
+  <ng-container *ngIf="!selectedCommunity; else communityTab">
+    <div class="row g-4">
+      <div class="col-md-6" *ngFor="let community of communities">
+        <div class="card border-0 shadow-sm p-4 rounded-4 bg-white border-start border-4"
+             [class.border-success]="community.accent === 'success'"
+             [class.border-warning]="community.accent === 'warning'">
+          <div class="d-flex justify-content-between align-items-start mb-3">
+            <div class="d-flex align-items-center">
+              <div class="bg-{{community.accent}} text-white p-3 rounded-circle me-3">{{ community.accent === 'success' ? '🤝' : '🍱' }}</div>
+              <div>
+                <h5 class="mb-0 fw-bold">{{ community.title }}</h5>
+                <span class="small text-muted">{{ community.members }} • {{ community.status }}</span>
+              </div>
             </div>
           </div>
-        </div>
-        <p class="small text-muted mb-4">Compartimos semillas, abono y técnicas de cultivo para fortalecer la soberanía alimentaria en nuestros barrios.</p>
-        <div class="d-flex gap-2">
-          <button class="btn btn-light flex-grow-1 rounded-pill btn-sm">Ver hilos</button>
-          <button class="btn btn-outline-success flex-grow-1 rounded-pill btn-sm">Unirme al grupo</button>
+          <p class="small text-muted mb-4">{{ community.description }}</p>
+          <div class="d-flex gap-2">
+            <button type="button" class="btn btn-light flex-grow-1 rounded-pill btn-sm" (click)="openCommunity(community)">Ver hilos</button>
+            <button type="button"
+                    class="btn flex-grow-1 rounded-pill btn-sm"
+                    [ngClass]="community.accent === 'success' ? 'btn-outline-success' : 'btn-outline-warning'"
+                    (click)="joinCommunity(community)">
+              {{ isJoined(community) ? 'Entrar al grupo' : 'Unirme al grupo' }}
+            </button>
+          </div>
         </div>
       </div>
+    </div>
+  </ng-container>
+
+  <ng-template #communityTab>
+    <div class="mb-4">
+      <button type="button" class="btn btn-link text-muted" (click)="backToList()">← Volver a comunidades</button>
     </div>
 
-    <div class="col-md-6">
-      <div class="card border-0 shadow-sm p-4 rounded-4 bg-white border-start border-4 border-warning">
-        <div class="d-flex justify-content-between align-items-start mb-3">
-          <div class="d-flex align-items-center">
-            <div class="bg-warning text-white p-3 rounded-circle me-3">🍱</div>
-            <div>
-              <h5 class="mb-0 fw-bold">Logística Comedores Comuna 10</h5>
-              <span class="small text-muted">42 miembros • Activo hace 2h</span>
+    <div class="card border-0 shadow-sm rounded-4 bg-white">
+      <div class="card-body p-4">
+        <div class="d-flex flex-column flex-md-row justify-content-between gap-3 align-items-start">
+          <div>
+            <h3 class="fw-bold">{{ selectedCommunity?.title }}</h3>
+            <p class="small text-muted mb-2">{{ selectedCommunity?.members }} • {{ selectedCommunity?.status }}</p>
+            <p class="text-muted mb-0">{{ selectedCommunity?.description }}</p>
+          </div>
+          <div class="text-md-end">
+            <button
+              type="button"
+              class="btn btn-orange rounded-pill px-4 py-2 fw-bold text-white"
+              style="background-color: #f28131;"
+              [disabled]="isJoined(selectedCommunity!)"
+              (click)="joinCommunity(selectedCommunity!)"
+            >
+              {{ isJoined(selectedCommunity!) ? 'Ya eres miembro' : 'Unirte al grupo' }}
+            </button>
+          </div>
+        </div>
+
+        <div class="btn-group mt-4" role="group">
+          <button type="button"
+                  class="btn btn-outline-secondary"
+                  [class.active]="activeTab === 'hilos'"
+                  (click)="setTab('hilos')">
+            Hilos
+          </button>
+          <button type="button"
+                  class="btn btn-outline-secondary"
+                  [class.active]="activeTab === 'miembros'"
+                  (click)="setTab('miembros')">
+            Miembros
+          </button>
+        </div>
+
+        <div class="mt-4">
+          <div *ngIf="activeTab === 'hilos'">
+            <div class="list-group">
+              <a href="#" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                  <h6 class="mb-1 fw-bold">Coordinación de siembra comunitaria</h6>
+                  <small class="text-muted">2h</small>
+                </div>
+                <p class="mb-1 text-muted">Organizamos la próxima jornada de siembra para el sábado en la comuna 6.</p>
+              </a>
+              <a href="#" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                  <h6 class="mb-1 fw-bold">Recolección de donaciones de abono</h6>
+                  <small class="text-muted">5h</small>
+                </div>
+                <p class="mb-1 text-muted">Buscamos voluntarios para recoger insumos donados por el vivero local.</p>
+              </a>
+            </div>
+          </div>
+
+          <div *ngIf="activeTab === 'miembros'">
+            <div class="row g-3">
+              <div class="col-md-4" *ngFor="let member of [1,2,3]">
+                <div class="card border-0 shadow-sm rounded-4 p-3">
+                  <p class="mb-1 fw-bold">Miembro {{ member }}</p>
+                  <p class="small text-muted mb-0">Activo recientemente</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <p class="small text-muted mb-4">Coordinación de transporte para excedentes de alimentos de restaurantes hacia puntos de entrega social.</p>
-        <div class="d-flex gap-2">
-          <button class="btn btn-light flex-grow-1 rounded-pill btn-sm">Ver hilos</button>
-          <button class="btn btn-outline-warning flex-grow-1 rounded-pill btn-sm">Unirme al grupo</button>
-        </div>
       </div>
     </div>
-  </div>
+  </ng-template>
 </div>
