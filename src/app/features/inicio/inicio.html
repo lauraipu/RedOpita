@@ -69,7 +69,7 @@
           <span class="badge bg-success-subtle text-success rounded-pill mb-3 px-3 py-2 small">COMEDOR COMUNITARIO</span>
           <h5 class="card-title fw-bold">Comedor La Esperanza – Comuna 6</h5>
           <p class="card-text text-muted small">Apoya en la preparación de alimentos para adultos mayores cada sábado. Neiva necesita tu manos.</p>
-          <button class="btn btn-outline-dark w-100 rounded-pill mt-3 py-2 fw-medium">Postularme ahora</button>
+          <button type="button" class="btn btn-outline-dark w-100 rounded-pill mt-3 py-2 fw-medium" (click)="openLoginModal()">Postularme ahora</button>
         </div>
       </div>
     </div>
@@ -81,7 +81,7 @@
           <span class="badge bg-orange-subtle text-warning rounded-pill mb-3 px-3 py-2 small" style="background-color: #fff3eb; color: #f4813c;">COLECTA DE ROPA</span>
           <h5 class="card-title fw-bold">Roperito Opita – Centro</h5>
           <p class="card-text text-muted small">Clasificación y entrega de prendas para familias en situación de vulnerabilidad. ¡Únete al equipo!</p>
-          <button class="btn btn-outline-dark w-100 rounded-pill mt-3 py-2 fw-medium">Postularme ahora</button>
+          <button type="button" class="btn btn-outline-dark w-100 rounded-pill mt-3 py-2 fw-medium" (click)="openLoginModal()">Postularme ahora</button>
         </div>
       </div>
     </div>
@@ -96,7 +96,39 @@
           <span class="badge bg-info-subtle text-info rounded-pill mb-3 px-3 py-2 small">EDUCACIÓN</span>
           <h5 class="card-title fw-bold">Refuerzo Escolar – El Caguán</h5>
           <p class="card-text text-muted small">Tutorías básicas para niños de primaria. Comparte tu conocimiento y cambia un futuro.</p>
-          <button class="btn btn-outline-dark w-100 rounded-pill mt-3 py-2 fw-medium">Postularme ahora</button>
+          <button type="button" class="btn btn-outline-dark w-100 rounded-pill mt-3 py-2 fw-medium" (click)="openLoginModal()">Postularme ahora</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showLoginModal" class="modal fade show" style="display: block;" tabindex="-1" aria-labelledby="loginModalLabel" aria-modal="true" role="dialog">
+    <div class="modal-backdrop fade show"></div>
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="border-radius: 20px; border: none;">
+        <div class="modal-body p-0">
+          <div class="card p-4 shadow-lg border-0">
+            <div class="text-end">
+              <button type="button" class="btn-close" (click)="closeLoginModal()" aria-label="Close"></button>
+            </div>
+            <div class="text-center mb-4">
+              <h2 class="fw-bold">Bienvenido</h2>
+              <p class="text-muted">Inicia sesión para postularte</p>
+            </div>
+            <form (submit)="submitLogin($event)">
+              <div class="mb-3">
+                <label class="form-label small fw-bold">Correo electrónico</label>
+                <input type="email" class="form-control rounded-pill" placeholder="ejemplo@correo.com">
+              </div>
+              <div class="mb-4">
+                <label class="form-label small fw-bold">Contraseña</label>
+                <input type="password" class="form-control rounded-pill" placeholder="••••••••">
+              </div>
+              <button type="submit" class="btn w-100 text-white fw-bold rounded-pill" style="background-color: #f28131;">
+                Iniciar sesión
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>

@@ -1,0 +1,15 @@
+/* Asegura que el fondo del modal sea blanco y opaco */
+.modal-content {
+    background-color: white !important;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* Corrige el oscurecimiento del fondo si se ve gris sobre el modal */
+.modal-backdrop {
+    z-index: 1040 !important;
+}
+.modal {
+    z-index: 1050 !important;
+}
