@@ -1,1 +1,34 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap');
+
+:root {
+  --primary: #1a6b4a;
+  --primary-light: #27a567;
+  --accent: #f4813c;
+  --accent-hover: #e06520;
+  --dark: #0f1f18;
+  --surface: #f7faf8;
+  --text-muted: #5a7068;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--surface);
+  color: var(--dark);
+}
+
+h1, h2, h3, .navbar-brand {
+  font-family: 'Syne', sans-serif;
+}
+
+.btn-orange {
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-orange:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-2px);
+  color: white;
+}

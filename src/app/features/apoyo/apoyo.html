@@ -1,0 +1,82 @@
+<div class="container py-5">
+  <div class="text-center mb-5">
+    <h1 class="display-5 fw-800">Centro de Apoyo</h1>
+    <p class="text-muted">¿Tienes dudas o quieres hacer una donación a gran escala? Aquí estamos para ayudarte.</p>
+  </div>
+
+  <div class="row g-4 justify-content-center">
+    <div class="col-md-5">
+      <div class="card border-0 shadow-sm p-4 rounded-4 bg-white h-100">
+        <div class="bg-orange-subtle p-3 rounded-circle d-inline-block mb-3" style="background-color: #fff3eb; width: fit-content;">
+          <span style="font-size: 1.5rem;">💰</span>
+        </div>
+        <h3 class="fw-bold h4">Donaciones Económicas</h3>
+        <p class="text-muted small">Todo el dinero recaudado se destina directamente a la compra de insumos para los comedores comunitarios de Neiva.</p>
+        <div class="bg-light p-3 rounded-3 mb-4">
+          <p class="mb-1 small fw-bold text-dark">Cuenta de Ahorros Red Opita</p>
+          <p class="mb-0 font-monospace text-success fw-bold">123-456789-00</p>
+        </div>
+        <button class="btn btn-orange w-100 rounded-pill fw-bold text-white">Reportar Donación</button>
+      </div>
+    </div>
+
+    <div class="col-md-5">
+      <div class="card border-0 shadow-sm p-4 rounded-4 bg-white h-100">
+        <div class="bg-success-subtle p-3 rounded-circle d-inline-block mb-3" style="background-color: #eaf5ef; width: fit-content;">
+          <span style="font-size: 1.5rem;">📧</span>
+        </div>
+        <h3 class="fw-bold h4">Contacto Directo</h3>
+        <p class="text-muted small">¿Eres una empresa o restaurante y quieres donar excedentes de alimentos? Escríbenos directamente.</p>
+        <form (ngSubmit)="onSubmit()" #contactForm="ngForm">
+          <div class="mb-3">
+            <input
+              name="name"
+              [(ngModel)]="contact.name"
+              required
+              type="text"
+              class="form-control form-control-sm rounded-pill"
+              placeholder="Nombre completo"
+            >
+          </div>
+          <div class="mb-3">
+            <input
+              name="email"
+              [(ngModel)]="contact.email"
+              required
+              type="email"
+              class="form-control form-control-sm rounded-pill"
+              placeholder="Correo electrónico"
+            >
+          </div>
+          <button
+            type="submit"
+            class="btn btn-outline-dark w-100 rounded-pill fw-bold"
+            [disabled]="contactForm.invalid"
+          >Enviar mensaje</button>
+        </form>
+
+        <div *ngIf="submitted" class="alert alert-success mt-3 rounded-pill">
+          Gracias por escribirnos. Pronto te contactaremos.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-5 pt-4">
+    <h4 class="fw-800 text-center mb-4">Preguntas Frecuentes</h4>
+    <div class="accordion accordion-flush mx-auto" id="faqRedOpita" style="max-width: 800px;">
+      <div class="accordion-item bg-transparent">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed bg-transparent fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#q1">
+            ¿Cómo sé que mi ayuda llegó a su destino?
+          </button>
+        </h2>
+        <div id="q1" class="accordion-collapse collapse" data-bs-parent="#faqRedOpita">
+          <div class="accordion-body text-muted small">
+            En la sección de "Comunidades" publicamos fotos y reportes semanales de las entregas realizadas en cada comuna.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
