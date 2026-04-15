@@ -27,37 +27,15 @@
         </div>
         <h3 class="fw-bold h4">Contacto Directo</h3>
         <p class="text-muted small">¿Eres una empresa o restaurante y quieres donar excedentes de alimentos? Escríbenos directamente.</p>
-        <form (ngSubmit)="onSubmit()" #contactForm="ngForm">
+        <form>
           <div class="mb-3">
-            <input
-              name="name"
-              [(ngModel)]="contact.name"
-              required
-              type="text"
-              class="form-control form-control-sm rounded-pill"
-              placeholder="Nombre completo"
-            >
+            <input type="text" class="form-control form-control-sm rounded-pill" placeholder="Nombre completo">
           </div>
           <div class="mb-3">
-            <input
-              name="email"
-              [(ngModel)]="contact.email"
-              required
-              type="email"
-              class="form-control form-control-sm rounded-pill"
-              placeholder="Correo electrónico"
-            >
+            <input type="email" class="form-control form-control-sm rounded-pill" placeholder="Correo electrónico">
           </div>
-          <button
-            type="submit"
-            class="btn btn-outline-dark w-100 rounded-pill fw-bold"
-            [disabled]="contactForm.invalid"
-          >Enviar mensaje</button>
+          <button class="btn btn-outline-dark w-100 rounded-pill fw-bold">Enviar mensaje</button>
         </form>
-
-        <div *ngIf="submitted" class="alert alert-success mt-3 rounded-pill">
-          Gracias por escribirnos. Pronto te contactaremos.
-        </div>
       </div>
     </div>
   </div>

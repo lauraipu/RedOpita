@@ -9,19 +9,5 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './apoyo.html'
 })
 export class ApoyoComponent {
-  contact = {
-    name: '',
-    email: ''
-  };
-
-  submitted = false;
-
-  onSubmit() {
-    if (!this.contact.name || !this.contact.email) {
-      return;
-    }
-
-    this.submitted = true;
-    this.contact = { name: '', email: '' };
-  }
+  // Aquí podrías agregar lógica para enviar el formulario más adelante
 }

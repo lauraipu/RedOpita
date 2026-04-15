@@ -1,0 +1,43 @@
+<div class="login-container d-flex align-items-center justify-content-center">
+  <div class="card p-4 shadow-lg" style="width: 100%; max-width: 400px; border-radius: 20px; border: none;">
+    
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">{{ isLogin ? 'Bienvenido' : 'Crea tu cuenta' }}</h2>
+      <p class="text-muted">{{ isLogin ? 'Ingresa a RedOpita' : 'Únete a nuestra comunidad' }}</p>
+    </div>
+
+    <form (ngSubmit)="onSubmit()">
+      @if (!isLogin) {
+        <div class="mb-3">
+          <label class="form-label small fw-bold">Nombre completo</label>
+          <input type="text" name="nombre" [(ngModel)]="usuario.nombre" class="form-control rounded-pill" placeholder="Tu nombre" required>
+        </div>
+      }
+
+      <div class="mb-3">
+        <label class="form-label small fw-bold">Correo electrónico</label>
+        <input type="email" name="email" [(ngModel)]="usuario.email" class="form-control rounded-pill" placeholder="ejemplo@correo.com" required>
+      </div>
+      
+      <div class="mb-4">
+        <label class="form-label small fw-bold">Contraseña</label>
+        <input type="password" name="password" [(ngModel)]="usuario.password" class="form-control rounded-pill" placeholder="••••••••" required>
+      </div>
+
+      <button type="submit" class="btn w-100 text-white fw-bold rounded-pill mb-3" style="background-color: #f28131;">
+        {{ isLogin ? 'Iniciar sesión' : 'Registrarse' }}
+      </button>
+
+      <div class="text-center">
+        <p class="small text-muted">
+          {{ isLogin ? '¿No tienes cuenta?' : '¿Ya tienes cuenta?' }}
+          <a href="javascript:void(0)" (click)="toggleMode()" class="fw-bold" style="color: #f28131; text-decoration: none;">
+            {{ isLogin ? 'Regístrate aquí' : 'Inicia sesión' }}
+          </a>
+        </p>
+        <hr>
+        <a routerLink="/inicio" class="text-decoration-none small text-muted">Volver al inicio</a>
+      </div>
+    </form>
+  </div>
+</div>
