@@ -11,7 +11,8 @@ import { RouterLink } from '@angular/router';
   styleUrl: './login.css'
 })
 export class LoginComponent {
-  isLogin: boolean = true; // Controla si vemos login o registro
+  isLogin: boolean = true;
+  registrado: boolean = false; // Nueva variable para el éxito
 
   usuario = {
     nombre: '',
@@ -21,13 +22,22 @@ export class LoginComponent {
 
   toggleMode() {
     this.isLogin = !this.isLogin;
+    this.registrado = false; // Reiniciar estado al cambiar
   }
 
   onSubmit() {
     if (this.isLogin) {
-      console.log('Iniciando sesión:', this.usuario.email);
+      console.log('Login exitoso');
     } else {
-      console.log('Registrando usuario:', this.usuario);
+      // Simulación de registro exitoso
+      this.registrado = true;
+      console.log('Registro completado para:', this.usuario.nombre);
+      
+      // Opcional: Volver al login automáticamente después de 3 segundos
+      setTimeout(() => {
+        this.isLogin = true;
+        this.registrado = false;
+      }, 3000);
     }
   }
 }
