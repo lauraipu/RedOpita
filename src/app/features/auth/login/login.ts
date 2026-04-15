@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,33 +11,35 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./login.css']
 })
 export class LoginComponent {
-  isLogin: boolean = true;
-  registrado: boolean = false; // Nueva variable para el éxito
-
+  isLogin = true;
+  registrado = false;
+  role: 'Voluntario' | 'Organización' = 'Voluntario';
   usuario = {
     nombre: '',
     email: '',
     password: ''
   };
 
+  constructor(private router: Router) {}
+
   toggleMode() {
     this.isLogin = !this.isLogin;
-    this.registrado = false; // Reiniciar estado al cambiar
+    this.registrado = false;
   }
 
   onSubmit() {
     if (this.isLogin) {
-      console.log('Login exitoso');
-    } else {
-      // Simulación de registro exitoso
-      this.registrado = true;
-      console.log('Registro completado para:', this.usuario.nombre);
-      
-      // Opcional: Volver al login automáticamente después de 3 segundos
-      setTimeout(() => {
-        this.isLogin = true;
-        this.registrado = false;
-      }, 3000);
+      if (this.role === 'Organización') {
+        this.router.navigate(['/dashboard']);
+      } else {
+        this.router.navigate(['/perfil']);
+      }
+      return;
     }
+    this.registrado = true;
+    setTimeout(() => {
+      this.isLogin = true;
+      this.registrado = false;
+    }, 3000);
   }
 }

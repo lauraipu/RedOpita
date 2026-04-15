@@ -25,35 +25,17 @@
         <label class="form-label small fw-bold">Correo electrónico</label>
         <input type="email" name="email" [(ngModel)]="usuario.email" class="form-control rounded-pill" placeholder="ejemplo@correo.com" required>
       </div>
-      
-      <div class="mb-4">
-        <label class="form-label small fw-bold">Contraseña</label>
-        <input type="password" name="password" [(ngModel)]="usuario.password" class="form-control rounded-pill" placeholder="••••••••" required>
+
+      <div class="mb-3">
+        <label class="form-label small fw-bold">Tipo de cuenta</label>
+        <select class="form-select rounded-pill" [(ngModel)]="role" name="role">
+          <option value="Voluntario">Voluntario</option>
+          <option value="Organización">Organización</option>
+        </select>
       </div>
-
-      <button type="submit" class="btn w-100 text-white fw-bold rounded-pill mb-3" style="background-color: #f28131;">
-        {{ isLogin ? 'Iniciar sesión' : 'Registrarse' }}
-      </button>
-
-      <div class="text-center">
-        <p class="small text-muted">
           {{ isLogin ? '¿No tienes cuenta?' : '¿Ya tienes cuenta?' }}
           <a href="javascript:void(0)" (click)="toggleMode()" class="fw-bold" style="color: #f28131; text-decoration: none;">
             {{ isLogin ? 'Regístrate aquí' : 'Inicia sesión' }}
           </a>
-        </p>
-      </div>
-    </form>
-  </div>
-</div>
-
-<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content p-4">
-      <div class="text-end">
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <h2 class="text-center fw-bold mt-2">Bienvenido</h2>
-    </div>
-  </div>
-</div>
+        
+      

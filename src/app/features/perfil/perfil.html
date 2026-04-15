@@ -1,0 +1,46 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div>
+            <h2 class="fw-bold">Perfil de Voluntario</h2>
+            <p class="text-muted mb-0">Visualiza tu progreso y las recompensas obtenidas por impactar la comunidad.</p>
+          </div>
+          <span class="badge bg-success rounded-pill py-2 px-3">{{ summary.badge }}</span>
+        </div>
+        <div class="row g-3 text-center">
+          <div class="col-4">
+            <div class="bg-light rounded-4 p-4">
+              <p class="small text-uppercase text-muted mb-2">Horas</p>
+              <h3 class="fw-bold mb-0">{{ summary.hours }}</h3>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="bg-light rounded-4 p-4">
+              <p class="small text-uppercase text-muted mb-2">Puntos de impacto</p>
+              <h3 class="fw-bold mb-0">{{ summary.points }}</h3>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="bg-light rounded-4 p-4">
+              <p class="small text-uppercase text-muted mb-2">Insignia</p>
+              <h3 class="fw-bold mb-0">{{ summary.badge }}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card border-0 shadow-sm rounded-4 p-4">
+        <h5 class="fw-bold mb-3">Registrar servicio</h5>
+        <form (ngSubmit)="recordHours()">
+          <div class="mb-3">
+            <label class="form-label small fw-bold">Horas de voluntariado</label>
+            <input type="number" min="1" class="form-control rounded-pill" [(ngModel)]="hours" name="hours" required>
+          </div>
+          <button type="submit" class="btn btn-primary w-100 rounded-pill">Actualizar progreso</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

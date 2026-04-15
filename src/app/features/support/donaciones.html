@@ -1,0 +1,28 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-7">
+      <div class="card border-0 shadow-sm rounded-4 p-4">
+        <h2 class="fw-bold mb-3">Donaciones Económicas</h2>
+        <p class="text-muted mb-4">Simula una transferencia segura para apoyar proyectos comunitarios.</p>
+        <form (ngSubmit)="submitDonation()">
+          <div class="mb-3">
+            <label class="form-label small fw-bold">Monto (COP)</label>
+            <input type="number" min="1" class="form-control rounded-pill" [(ngModel)]="amount" name="amount" required>
+          </div>
+          <button type="submit" class="btn btn-primary w-100 rounded-pill mb-3">Procesar pago</button>
+        </form>
+        <div *ngIf="error" class="alert alert-danger rounded-4">{{ error }}</div>
+        <div *ngIf="status === 'pendiente'" class="alert alert-warning rounded-4">
+          Transacción pendiente. Espera la confirmación de la pasarela de pago.
+        </div>
+        <div *ngIf="status === 'aprobado'" class="alert alert-success rounded-4">
+          Donación aprobada. Gracias por tu apoyo.
+        </div>
+        <div *ngIf="status === 'rechazado'" class="alert alert-danger rounded-4">
+          Transacción rechazada. Revisa el monto o intenta con otro método.
+        </div>
+        <button *ngIf="status" type="button" class="btn btn-outline-secondary w-100 rounded-pill mt-3" (click)="resetForm()">Nueva transacción</button>
+      </div>
+    </div>
+  </div>
+</div>
